@@ -18,9 +18,13 @@ export default class Game extends React.Component {
 
     importGuesses(guess) {
 
-        this.setState({
-            guesses: [...this.state.guesses, guess]
-        })
+        if (this.state.guesses.includes(guess)) {
+          return this.setState({ feedback: 'You already guessed that.' });
+        } else {
+          this.setState({
+              guesses: [...this.state.guesses, guess]
+          });
+        }
 
         const difference = Math.abs(guess - this.state.num);
 
