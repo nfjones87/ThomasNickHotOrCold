@@ -24,7 +24,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <header>
-        <TopNav onClick={() => this.toggleModal()} />
+        <TopNav onClick={() => this.toggleModal()} newGame={this.props.newGame}/>
         <InfoModal isNotDisplayed={this.state.isNotDisplayed} onClick={() => this.toggleModal()} />
         <h1>HOT or COLD</h1>
       </header>

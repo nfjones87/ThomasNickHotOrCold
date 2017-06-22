@@ -11,15 +11,30 @@ export default class Game extends React.Component {
         super(props);
         this.state = {
             guesses: [],
-            num: Math.floor((Math.random() * 100) + 1)
+            num: Math.floor((Math.random() * 100) + 1),
+            feedback: 'Make your guess!'
         }
     }
 
     importGuesses(guess) {
-        
+
         this.setState({
             guesses: [...this.state.guesses, guess]
         })
+
+        const difference = Math.abs(guess - this.state.num);
+
+        if (Number(guess) === this.state.num) {
+          this.setState({ feedback: 'You got it...Great Job!' });
+        } else if (difference >= 50) {
+          this.setState({ feedback: 'You are ice cold!!!!' });
+        } else if (difference >= 30) {
+          this.setState({ feedback: 'You are pretty cold.' });
+        } else if (difference >= 10) {
+          this.setState({ feedback: 'Now you are warm.' });
+        } else if (difference >= 1) {
+          this.setState({ feedback: 'You are hot!' });
+        }
     }
 
 
@@ -37,8 +52,8 @@ export default class Game extends React.Component {
     render() {
         return (
             <div>
-                <Header />
-                <GuessSection feedback="Make your guess!" onGuess ={(guess) => this.importGuesses(guess)} />
+              <Header newGame={() => this.newGame()}/>
+              <GuessSection feedback={this.state.feedback} onGuess ={(guess) => this.importGuesses(guess)} />
                 <GuessCount count={this.state.guesses.length} />
                 <GuessList guesses={this.state.guesses} />
             </div>
@@ -46,4 +61,3 @@ export default class Game extends React.Component {
     }
 
 }
-

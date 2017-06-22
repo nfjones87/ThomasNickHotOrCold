@@ -9,10 +9,10 @@ export default function TopNav(props) {
         <li>
           <a className='what' href='#' onClick={() => props.onClick()}>
             What?
-                    </a>
+          </a>
         </li>
         <li>
-          <a className='new' href='#'>
+          <a className='new' href='#' onClick={() => props.newGame()}>
                         + New Game
                     </a>
         </li>
